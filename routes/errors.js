@@ -8,7 +8,7 @@ router.use((err, req, res, next) => {
 });
 
 router.get(`*`, (req, res) => {
-    res.render(`.Sorry! We couldn't find the page you were looking for./404`)
+    res.render(`404`)
 });
 
 module.exports = router;
