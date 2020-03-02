@@ -1,9 +1,10 @@
 const Sequelize = require(`sequelize`);
 
 const sequelize = new Sequelize({
+
     dialect: `sqlite`,
     storage: `library.db`,
-    //logging: false?
+    logging: false
 });
 
 const db = {
@@ -12,6 +13,7 @@ const db = {
     models: {}
 };
 
-db.models.Books = require(`./models/books`)
+
+db.models.Book = require(`./models/books`)(sequelize);
 
 module.exports = db;
