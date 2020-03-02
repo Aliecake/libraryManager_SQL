@@ -1,0 +1,22 @@
+extends layout.pug
+block content
+    h2 Update:: !{book.title}
+    form(action="")
+    p
+        label(for="title")
+        input(type="text" id="title" value=`${book.title}`)
+    p
+        label(for="author")
+        input(type="text" id="author" value=`${book.author}`)
+    p
+        label(for="genre")
+        input(type="text" id="genre" value=`${book.genre}`)
+    p
+        label(for="year")
+        input(type="text" id="year" value=`${book.year}`)
+    p
+        input(type="submit" value="Update Book")
+    p
+        input(type="submit" value="Cancel")
+    p
+        input(type="submit" value="Delete Book")
