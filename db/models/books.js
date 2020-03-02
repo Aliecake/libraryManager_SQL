@@ -40,8 +40,6 @@ module.exports = (sequelize) => {
             type: Sequelize.INTEGER
         }
     }, {
-        modelName: `book`,
-        tableName: `library_book`,
         sequelize
     })
     return Book;
