@@ -1,17 +1,26 @@
 const express = require(`express`);
+const methodOverride = require(`method-override`);
+const bodyParser = require('body-parser');
 const path = require(`path`);
 const mainRoutes = require(`./routes/index`)
 const errorRoutes = require(`./routes/errors`)
+const editRoutes = require(`./routes/bookEdit`)
 
-
-const app = express();
 const port = process.env.PORT || 3000;
 
-app.use('/static', express.static(path.join(__dirname, 'public')));
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(methodOverride('_method'));
+
+
+app.use(`/static`, express.static(path.join(__dirname, `public`)));
 
 
 app.use(mainRoutes);
 app.use(errorRoutes);
+app.use(editRoutes);
 
 app.set(`view engine`, `pug`);
 
