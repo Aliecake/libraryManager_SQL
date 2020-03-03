@@ -38,8 +38,11 @@ module.exports = (sequelize) => {
         },
         year: {
             type: Sequelize.INTEGER
-        }
+        },
+
     }, {
+        timestamps: true,
+        paranoid: true, //fake deletion
         sequelize
     })
     return Book;
