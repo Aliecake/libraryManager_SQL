@@ -20,7 +20,7 @@ const router = express.Router();
 router.get(`/`, (req, res) => {
     
     (async () => {
-        // await db.sequelize.sync({alter: true})
+        await db.sequelize.sync({alter: true})
         try {
             const books = await Book.findAll({
                 order: [[`id`, `ASC`]]
@@ -39,7 +39,7 @@ router.get(`/book/:id`, (req, res) => {
         await db.sequelize.sync({alter: true})
         try {
             const book = await Book.findByPk(req.params.id)
-            console.log(book)
+     
             res.render(`book_detail`, { book : book.dataValues })
         } catch(err) {
             console.log(err)
@@ -53,8 +53,5 @@ router.get(`/book/:id/details`, (req, res) => {
     res.send(`book details for ${req.params.id}`)
 });
 
-// router.get(`*`, (req, res) => {
-//     res.send(`404 not found`)
-// });
 
 module.exports = router;
