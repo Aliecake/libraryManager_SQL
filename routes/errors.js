@@ -1,5 +1,5 @@
-const express = require(`express`);
-const router = express.Router();
+const express = require(`express`),
+    router = express.Router();
 
 
 router.use((err, req, res, next) => {
@@ -8,7 +8,7 @@ router.use((err, req, res, next) => {
 });
 
 router.get(`*`, (req, res) => {
-    res.render(`404`)
+    res.render(`404`);
 });
 
 module.exports = router;
