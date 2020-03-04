@@ -37,7 +37,10 @@ module.exports = (sequelize) => {
             type: Sequelize.STRING
         },
         year: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            validate: {
+                isInt: true
+            }
         },
         deletedAt: {
             type: Sequelize.DATE
