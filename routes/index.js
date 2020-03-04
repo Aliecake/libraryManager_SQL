@@ -16,9 +16,8 @@ const router = express.Router();
 });
 
 
-
+//-- INDEX --//
 router.get(`/`, (req, res) => {
-    
     (async () => {
         await db.sequelize.sync({alter: true})
         try {
@@ -29,29 +28,30 @@ router.get(`/`, (req, res) => {
         } catch(err) {
             console.log(err)
         }
-        
     })()
 
 });
 
-router.get(`/book/:id`, (req, res) => {
+//-- CREATE ROUTE --//
+router.get(`/books/new_book`, (req, res) => {
+    res.render(`new`)
+})
+
+//-- DETAIL ROUTE --//
+router.get(`/books/:id/details`, (req, res) => {
     (async () => {
         await db.sequelize.sync({alter: true})
         try {
             const book = await Book.findByPk(req.params.id)
-     
+
             res.render(`book_detail`, { book : book.dataValues })
+
         } catch(err) {
             console.log(err)
         }
-        
     })()
- 
 });
 
-router.get(`/book/:id/details`, (req, res) => {
-    res.send(`book details for ${req.params.id}`)
-});
 
 
 module.exports = router;

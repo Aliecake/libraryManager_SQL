@@ -1,7 +1,7 @@
 extends layout.pug
 block content
     h2 Update:: !{book.title}
-    form(action=`/book/${book.id}?_method=PUT` method="POST")
+    form(action=`/books/${book.id}?_method=PUT` method="POST")
         p
             label(for="title")
             input(type="text" name="title" id="title" value=`${book.title}`)
@@ -19,5 +19,5 @@ block content
     p
         input(type="submit" value="Cancel")
     p
-        form(action=`/book/${book.id}?_method=DELETE` method="POST")
+        form(action=`/books/${book.id}?_method=DELETE` method="POST")
             input(type="submit" value="Delete Book")

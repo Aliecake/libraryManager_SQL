@@ -2,7 +2,7 @@ extends layout.pug
 block content
 
     p
-        a(href="/new_book").button Create a new Book
+        a(href="/books/new_book").button Create a new Book
     table
         thead
             th Title
@@ -13,7 +13,7 @@ block content
             each book in books
                 tr
                     td
-                        a(href=`/book/${book.id}`) #{book.title}
+                        a(href=`/books/${book.id}/details`) #{book.title}
                         //- a(href="`/book/${book.id}`")#{book.title}
                     td #{book.author}
                     td #{book.genre}
