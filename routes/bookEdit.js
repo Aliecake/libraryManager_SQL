@@ -10,8 +10,8 @@ const router = express.Router({ mergeParams: true });
 
 
 //-- NEW ROUTE --//
-router.post(`/books/new`, (req, res) => {
-    (async () => {
+router.post(`/books/new`, async (req, res) => {
+ 
         try {
             await Book.create({
                 title: req.body.title,
@@ -22,16 +22,12 @@ router.post(`/books/new`, (req, res) => {
         } catch(err) {
             console.log(err)
         }
-    })()
     res.redirect(`/`)
 })
 
 //-- EDIT ROUTE --//
-router.put(`/books/:id`, (req, res) => {
+router.put(`/books/:id`, async (req, res) => {
     const id = req.params.id;
-
-
-    (async () => {
 
         try {
         const update = {
@@ -54,15 +50,12 @@ router.put(`/books/:id`, (req, res) => {
             console.log(`Error updating book`, err)
         }
         res.redirect(`/books/${id}/details`)
-    })()
 
 })
 
 //-- DELETE ROUTE --//
-router.delete(`/books/:id`, (req, res) =>{
+router.delete(`/books/:id`, async (req, res) =>{
     const id = req.params.id;
-
-    (async () => {
 
         try {
             //FIND BY ID AND DELETE ENTRY
@@ -79,7 +72,6 @@ router.delete(`/books/:id`, (req, res) =>{
         } catch (err) {
             console.log(err)
         }
-    })();
 });
 
 module.exports = router;
