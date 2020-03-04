@@ -13,6 +13,15 @@ const db = {
     models: {}
 };
 
+//TEST DB connection
+(async () => {
+    try {
+        await sequelize.authenticate();
+        console.log(`Connection to DB working`)
+      } catch (error) {
+        console.log(`Connection to DB failed`)
+      }
+})();
 
 db.models.Book = require(`./models/books`)(sequelize);
 
