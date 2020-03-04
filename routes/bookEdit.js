@@ -6,34 +6,66 @@ const methodOverride = require(`method-override`);
 const { Book } = db.models;
 
 //merge params to pull in req.params
-const router = express.Router({mergeParams: true});
+const router = express.Router({ mergeParams: true });
 
 
-router.post(`/book/:id`, (req, res) => {
-    console.log(`post route`)
-    // res.redirect(`/`)
+//-- NEW ROUTE --//
+router.post(`/books/new`, (req, res) => {
+    (async () => {
+        try {
+            await Book.create({
+                title: req.body.title,
+                author: req.body.author,
+                genre: req.body.genre,
+                year: req.body.year
+            })
+        } catch(err) {
+            console.log(err)
+        }
+    })()
+    res.redirect(`/`)
 })
 
 //-- EDIT ROUTE --//
-
-router.put(`/book/:id`, (req, res) => {
+router.put(`/books/:id`, (req, res) => {
     const id = req.params.id;
-    console.log(req.body)
-    // (async () => {
-    //     const bookToUpdate = await Book.findByPk(id)
-    //     console.log(req)
-    // })()
+
+
+    (async () => {
+
+        try {
+        const update = {
+            title: req.body.title,
+            author: req.body.author,
+            genre: req.body.genre,
+            year: req.body.year //string
+        }
+        //FIND BY ID AND UPDATE ENTRY
+        const bookToUpdate = await Book.findByPk(id)
+
+        await bookToUpdate.update({
+            title: update.title,
+            author: update.author,
+            genre: update.genre,
+            year: parseInt(update.year)
+        })
+
+        } catch(err) {
+            console.log(`Error updating book`, err)
+        }
+        res.redirect(`/books/${id}/details`)
+    })()
 
 })
 
 //-- DELETE ROUTE --//
-router.delete(`/book/:id`, (req, res) =>{
+router.delete(`/books/:id`, (req, res) =>{
     const id = req.params.id;
 
     (async () => {
 
         try {
-
+            //FIND BY ID AND DELETE ENTRY
             const bookToDelete = await Book.findByPk(id)
 
             await Book.destroy({
@@ -49,4 +81,5 @@ router.delete(`/book/:id`, (req, res) =>{
         }
     })();
 });
+
 module.exports = router;
