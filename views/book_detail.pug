@@ -17,7 +17,10 @@ block content
         p
             input(type="submit" value="Update Book")
     p
-        input(type="submit" value="Cancel")
+        form(action="/")
+            label(for="cancel")
+            input(type="submit" id="cancel" value="Cancel")
     p
         form(action=`/books/${book.id}?_method=DELETE` method="POST")
-            input(type="submit" value="Delete Book")
+            label(for="update")
+            input(type="submit" id="update" value="Delete Book")
