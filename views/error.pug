@@ -1,9 +1,8 @@
-extends layout.pug
-block content
-    title Error // Error Code
-    h2 Error// Error Code
-
-    p Sorry, There was an error handling your request. Details as follows:
-    p #{err}
+if(errors)
+    h2.error Oops, an error!.
+    ul
+        each err in errors
+            li.error
+                =err.message
     p
         a(href="/") Return Home

@@ -9,7 +9,7 @@ middleware.asyncHandler = (cb) => {
         try {
             await cb(req, res, next)
         } catch (err) {
-            res.render(`error`, { err })
+            res.status(500).send(err);
         }
     }
 }

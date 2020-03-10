@@ -19,11 +19,10 @@ app.use(`/static`, express.static(path.join(__dirname, `public`)));
 
 
 app.use(mainRoutes);
-app.use(errorRoutes);
 app.use(editRoutes);
+app.use(errorRoutes);
 
 app.set(`view engine`, `pug`);
-
 
 app.listen(port, () => {
     console.log(`Weeeeee, I'm listening on port 3000`);

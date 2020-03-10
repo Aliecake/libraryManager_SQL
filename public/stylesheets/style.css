@@ -15,8 +15,9 @@ a {
   }
 
 a.button, input[type=submit] {
+
   color: white;
-  background: #019875;
+  background: #0159b1;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
   font-size: 14px;
@@ -24,7 +25,7 @@ a.button, input[type=submit] {
   cursor: pointer;
 }
 
-form a.button, input[type=submit] {
+form, input[type=submit] {
   margin-left: 140px;
   transition: 0.4s;
 }
@@ -33,8 +34,8 @@ input[type=submit] {
   border: 0;
 }
 
-  a.button:hover, input[type=submit]:hover {
-    background-color: #01b189;
+input[type=submit]:hover {
+    background-color: #4373a2;
   }
 
 p {

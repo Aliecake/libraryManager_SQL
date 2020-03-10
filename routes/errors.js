@@ -7,8 +7,10 @@ router.use((err, req, res, next) => {
     next(err);
 });
 
-router.get(`*`, (req, res) => {
-    res.render(`404`);
+app.get(`*`, (req, res) => {
+    res.render(`page_not_found`);
 });
+
+
 
 module.exports = router;

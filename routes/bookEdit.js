@@ -9,41 +9,49 @@ const { Book } = db.models;
 //merge params to pull in req.params
 const router = express.Router({ mergeParams: true });
 
-
 //-- NEW ROUTE --//
 router.post(`/books/new`, middleware.asyncHandler(async (req, res) => {
+    let book;
+    //try/catch - if no validation errors will create book or show errors
+    try{
+        book = await Book.create(req.body)
+        res.redirect(`/`)
 
-        await Book.create({
-            title: req.body.title,
-            author: req.body.author,
-            genre: req.body.genre,
-            year: req.body.year
-        })
+    } catch(err) {
+        if(err.name === `SequelizeValidationError`){
+            book = Book.build(req.body)
+            res.render(`new_book`, {book, errors: err.errors})
+        } else {
+            throw err
+        }
+    }
 
-    res.redirect(`/`)
 }))
 
 //-- EDIT ROUTE --//
 router.put(`/books/:id`, middleware.asyncHandler(async (req, res) => {
     const id = req.params.id;
+    let bookToUpdate;
 
-    const update = {
-        title: req.body.title,
-        author: req.body.author,
-        genre: req.body.genre,
-        year: req.body.year //string
+    try {
+         //FIND BY ID AND UPDATE ENTRY
+        bookToUpdate = await Book.findByPk(id)
+
+        if(bookToUpdate) {
+            await bookToUpdate.update(req.body)
+            res.redirect(`/books/${id}/details`)
+        } else {
+            res.sendStatus(404);
+        }
+    } catch(err) {
+        if(err.name === `SequelizeValidationError`){
+            bookToUpdate = await Book.build(req.body)
+            res.render(`update_book`, {book: bookToUpdate, errors: err.errors})
+        } else {
+            throw err
+        }
     }
-    //FIND BY ID AND UPDATE ENTRY
-    const bookToUpdate = await Book.findByPk(id)
 
-    await bookToUpdate.update({
-        title: update.title,
-        author: update.author,
-        genre: update.genre,
-        year: parseInt(update.year)
-    })
-
-    res.redirect(`/books/${id}/details`)
 }))
 
 //-- DELETE ROUTE --//
@@ -52,15 +60,16 @@ router.delete(`/books/:id`, middleware.asyncHandler(async (req, res) =>{
 
     //FIND BY ID AND DELETE ENTRY
     const bookToDelete = await Book.findByPk(id)
-
-    await Book.destroy({
-        where: {
-            id: bookToDelete.id
-        }
-    });
-
-    res.redirect(`/`)
-
+    if(bookToDelete) {
+        await Book.destroy({
+            where: {
+                id: bookToDelete.id
+            }
+        });
+        res.redirect(`/`)
+    } else {
+        res.sendStatus(404)
+    }
 }))
 
 module.exports = router;

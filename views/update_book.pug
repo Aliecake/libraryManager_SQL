@@ -1,6 +1,7 @@
 extends layout.pug
 block content
     h2 Update:: !{book.title}
+    include error
     form(action=`/books/${book.id}?_method=PUT` method="POST")
         p
             label(for="title")
@@ -15,12 +16,13 @@ block content
             label(for="year")
             input(type="text" name="year" id="year" value=`${book.year}`)
         p
-            input(type="submit" value="Update Book")
-    p
-        form(action="/")
-            label(for="cancel")
-            input(type="submit" id="cancel" value="Cancel")
-    p
-        form(action=`/books/${book.id}?_method=DELETE` method="POST")
             label(for="update")
-            input(type="submit" id="update" value="Delete Book")
+            input(type="submit" id="update" value="Update Book")
+        p
+            form(action=`/books/${book.id}?_method=DELETE` method="POST")
+                label(for="delete")
+                input(type="submit" id="delete" value="Delete Book")
+        p
+            form(action="/")
+                label(for="cancel")
+                input(type="submit" id="cancel" value="Cancel")

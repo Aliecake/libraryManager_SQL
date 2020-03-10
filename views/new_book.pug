@@ -1,6 +1,7 @@
 extends layout.pug
 block content
     h2 Add a new book
+    include error
     form(action=`/books/new?_method=POST` method="POST")
         p
             label(for="title")
