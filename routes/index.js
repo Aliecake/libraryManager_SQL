@@ -7,7 +7,12 @@ const { Book } = db.models;
 const router = express.Router();
 
 //-- INDEX --//
-router.get(`/`, middleware.asyncHandler(async (req, res) => {
+router.get(`/`, (req, res) => {
+        res.redirect(`/books`)
+});
+
+//-- SHOW ROUTE --//
+router.get(`/books`, middleware.asyncHandler(async (req, res) => {
     await db.sequelize.sync({alter: true})
 
         const books = await Book.findAll({
@@ -15,6 +20,7 @@ router.get(`/`, middleware.asyncHandler(async (req, res) => {
         })
         res.render(`index`, { books })
 }));
+
 
 //-- CREATE ROUTE --//
 router.get(`/books/new`, (req, res) => {
