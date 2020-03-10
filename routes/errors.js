@@ -7,7 +7,7 @@ router.use((err, req, res, next) => {
     next(err);
 });
 
-app.get(`*`, (req, res) => {
+router.get(`*`, (req, res) => {
     res.render(`page_not_found`);
 });
 
