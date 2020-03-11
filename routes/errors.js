@@ -8,7 +8,7 @@ router.use((err, req, res, next) => {
 });
 
 router.get(`*`, (req, res) => {
-    res.render(`page_not_found`);
+    res.render(`page-not-found`);
 });
 
 

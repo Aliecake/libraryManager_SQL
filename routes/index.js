@@ -24,14 +24,14 @@ router.get(`/books`, middleware.asyncHandler(async (req, res) => {
 
 //-- CREATE ROUTE --//
 router.get(`/books/new`, (req, res) => {
-    res.render(`new_book`)
+    res.render(`new-book`)
 });
 
 //-- DETAIL ROUTE --//
-router.get(`/books/:id/details`, middleware.asyncHandler(async (req, res) => {
+router.get(`/books/:id`, middleware.asyncHandler(async (req, res) => {
     const book = await Book.findByPk(req.params.id)
     if(book) {
-        res.render(`update_book`, { book : book.dataValues })
+        res.render(`update-book`, { book : book })
     } else {
         res.sendStatus(404)
     }
