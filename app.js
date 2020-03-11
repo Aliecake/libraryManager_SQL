@@ -1,5 +1,4 @@
 const express = require(`express`);
-const methodOverride = require(`method-override`);
 const bodyParser = require('body-parser');
 const path = require(`path`);
 const mainRoutes = require(`./routes/index`)
@@ -11,9 +10,6 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(methodOverride('_method'));
-
 
 app.use(`/static`, express.static(path.join(__dirname, `public`)));
 
