@@ -4,5 +4,7 @@ if(errors)
         each err in errors
             li.error
                 =err.message
+        if errors == `Error: That book doesn't exist`
+            p !{errors}
     p
         a(href="/") Return Home

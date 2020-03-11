@@ -3,6 +3,7 @@ block content
 
     p
         a(href="/books/new").button Create a new Book
+    include error
     table
         thead
             th Title
@@ -10,11 +11,12 @@ block content
             th Genre
             th Year
         tbody
-            each book in books
-                tr
-                    td
-                        a(href=`/books/${book.id}`) #{book.title}
-                        //- a(href="`/book/${book.id}`")#{book.title}
-                    td #{book.author}
-                    td #{book.genre}
-                    td #{book.year}
+            if books
+                each book in books
+                    tr
+                        td
+                            a(href=`/books/${book.id}`) #{book.title}
+                            //- a(href="`/book/${book.id}`")#{book.title}
+                        td #{book.author}
+                        td #{book.genre}
+                        td #{book.year}

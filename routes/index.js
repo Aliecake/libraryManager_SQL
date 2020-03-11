@@ -33,7 +33,8 @@ router.get(`/books/:id`, middleware.asyncHandler(async (req, res) => {
     if(book) {
         res.render(`update-book`, { book : book })
     } else {
-        res.sendStatus(404)
+        let errors = new Error(`That book doesn't exist`);
+        res.render(`update-book`, { errors });
     }
 }));
 

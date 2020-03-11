@@ -40,7 +40,8 @@ router.post(`/books/:id`, middleware.asyncHandler(async (req, res) => {
             await bookToUpdate.update(req.body)
             res.redirect(`/books/${id}`)
         } else {
-            res.sendStatus(404);
+            let errors = new Error(`That book doesn't exist`);
+            res.render(`index`, { errors });
         }
     } catch(err) {
         if(err.name === `SequelizeValidationError`){
@@ -64,7 +65,9 @@ router.post(`/books/:id/delete`, middleware.asyncHandler(async (req, res) =>{
 
         res.redirect(`/books`)
     } else {
-        res.sendStatus(404)
+        let errors = new Error("That book does not exist!");
+
+        res.render(`update-book`, { errors })
     }
 }))
 
