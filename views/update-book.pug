@@ -1,0 +1,26 @@
+extends layout.pug
+block content
+    h2 Update:: !{book.title}
+    include error
+    form(action=`/books/${book.id}?_method=POST` method="POST")
+        p
+            label(for="title") Title:
+            input(type="text" name="title" id="title" value=`${book.title}`)
+        p
+            label(for="author") Author:
+            input(type="text" name="author" id="author" value=`${book.author}`)
+        p
+            label(for="genre") Genre:
+            input(type="text" name="genre" id="genre" value=`${book.genre}`)
+        p
+            label(for="year") Year:
+            input(type="text" name="year" id="year" value=`${book.year}`)
+        p
+            input(type="submit" id="update" value="Update Book")
+
+    p
+        form(action=`/books/${book.id}/delete` method="POST")
+            input(type="submit" id="delete" value="Delete Book")
+    p
+        form(action="/")
+            input(type="submit" id="cancel" value="Cancel")
